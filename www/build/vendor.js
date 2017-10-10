@@ -74863,7 +74863,7 @@ SplashScreen = __decorate([
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export SQLiteObject */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return SQLiteObject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SQLite; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_core__ = __webpack_require__(98);
