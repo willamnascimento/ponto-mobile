@@ -1,35 +1,15 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Registro</ion-title>
+    <ion-title>
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-label class="center">Registro de Usuário</ion-label>
-  
-  <ion-list>
 
-    <ion-item>
-      <ion-label floating>nome</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+  <h1 text-center margin-bottom>Escolha opção:</h1>
 
-    <ion-item>
-      <ion-label floating>e-mail</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+  <button ion-button block (click)="openCreateAccount()">Criar conta</button>
+  <button ion-button block (click)="openLogin()">Login</button>
 
-    <ion-item>
-      <ion-label floating>carga horária</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-
-  </ion-list>
-
-  <button ion-button full color="light" >Enviar</button>
-  
-  
 </ion-content>

@@ -25,6 +25,9 @@ export class SqlStorage {
 
 	    	// Criando as tabelas
 	    	this.createTables(db);
+	    	
+	    	// Inserindo dados padrão
+        	this.insertDefaultItems(db);
 	  })
 	  .catch(e => console.log(e));
 	}
@@ -40,5 +43,23 @@ export class SqlStorage {
 	])
 	  .then(() => console.log('Tabelas criadas'))
 	  .catch(e => console.error('Erro ao criar as tabelas', e));
+	}
+
+	private insertDefaultItems(db: SQLiteObject) {
+		db.executeSql('select COUNT(id) as qtd from categories', {}) 
+		.then((data: any) => {
+	  		//Se não existe nenhum registro
+	  		if (data.rows.item(0).qtd == 0) {
+
+	    	// Criando as tabelas
+	    	db.sqlBatch([
+	      		['insert into dados (nome,email,carg_horaria) values (?,?,?)', ['Usuário Teste'],['usuario@gmail.com'],['08:00']]
+	      		
+	    	])
+	      	.then(() => console.log('Dados padrões incluídos'))
+	      	.catch(e => console.error('Erro ao incluir dados padrões', e));
+	  	}
+	})
+	.catch(e => console.error('Erro ao consultar a qtd de categorias', e));
 	}
 }

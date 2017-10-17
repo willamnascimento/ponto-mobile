@@ -25,7 +25,16 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage }
     ];
-
+    sqlStorage.createDatabase()
+      .then(() => {
+        // fechando a SplashScreen somente quando o banco for criado
+        this.openHomePage(splashScreen);
+      })
+      .catch(() => {
+        // ou se houver erro na criação do banco
+        this.openHomePage(splashScreen);
+      });
+    
   }
 
   initializeApp() {
@@ -41,6 +50,11 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  private openHomePage(splashScreen: SplashScreen) {
+    splashScreen.hide();
+    this.rootPage = HomePage;
   }
 }
 
