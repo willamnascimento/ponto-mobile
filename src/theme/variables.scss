@@ -38,12 +38,13 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222n
+  dark:       #222fff
 );
 
-$toolbar-background: black;
-$background-color:	#191919;
-$label-wp-text-color:	#000;
+$toolbar-background: #fff;
+$text-color: #151518;
+$content-padding: 10px;
+$background-color: #000 !default;
 
 // App iOS Variables
 // --------------------------------------------------

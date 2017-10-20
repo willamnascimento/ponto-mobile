@@ -8,13 +8,13 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController) { }  
 
   openCreateAccount() {
     this.navCtrl.push('CreateAccountPage');
   }
 
   openLogin() {
-    this.navCtrl.push('LoginPage');
+  	this.navCtrl.push('LoginPage');
   }
 }

@@ -35,4 +35,5 @@ export class LoginPage {
 export class User {
   email: string;
   password: string;
+  carga_horaria: string;
 }
