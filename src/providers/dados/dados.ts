@@ -1,124 +1,49 @@
 import { Injectable } from '@angular/core';
 import { SQLiteObject } from '@ionic-native/sqlite';
 import { SqlStorage } from '../sql-storage/sql-storage';
-import { Http } from '@angular/http';
+import { Http, Headers, Response, ResponseOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 
 @Injectable()
 export class Dados {
-	private API_URL = 'https://reqres.in/api/'
+    private API_URL = 'http://localhost:60643/api/account/';
 
-  	constructor(public http: Http) { }
+    constructor(public http: Http) { }
 
-  	createAccount(email: string, password: string) {
-  	debugger
-	    return new Promise((resolve, reject) => {
-	      var data = {
-	        email: email,
-	        password: password
-	      };
+    createAccount(parans) {
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this.http.post(this.API_URL + "add", parans, {
+            headers: headers,
+            method: "POST",
+            params: parans
+        }).map(
+            (res: Response) => { return res.json(); }
+            );
+    }
 
-	      this.http.post(this.API_URL + 'register', data)
-	        .subscribe((result: any) => {
-	          resolve(result.json());
-	        },
-	        (error) => {
-	          reject(error.json());
-	        });
-	    });
-	  }
+    login(email: string, password: string) {
+        
+    }
 
-	  login(email: string, password: string) {
-	    return new Promise((resolve, reject) => {
-	      var data = {
-	        email: email,
-	        password: password
-	      };
+    getAll(page: number) {
+        
+    }
 
-	      this.http.post(this.API_URL + 'login', data)
-	        .subscribe((result: any) => {
-	          resolve(result.json());
-	        },
-	        (error) => {
-	          reject(error.json());
-	        });
-	    });
-	  }
+    get(id: number) {
+        
+    }
 
-	  getAll(page: number) {
-	    return new Promise((resolve, reject) => {
+    insert(user: any) {
+        
+    }
 
-	      let url = this.API_URL + 'users/?per_page=10&page=' + page;
+    update(user: any) {
+        
+    }
 
-	      this.http.get(url)
-	        .subscribe((result: any) => {
-	          resolve(result.json());
-	        },
-	        (error) => {
-	          reject(error.json());
-	        });
-	    });
-	  }
-
-	  get(id: number) {
-	    return new Promise((resolve, reject) => {
-	      let url = this.API_URL + 'users/' + id;
-
-	      this.http.get(url)
-	        .subscribe((result: any) => {
-	          resolve(result.json());
-	        },
-	        (error) => {
-	          reject(error.json());
-	        });
-	    });
-	  }
-
-	  insert(user: any) {
-	    return new Promise((resolve, reject) => {
-	      let url = this.API_URL + 'users/';
-
-	      this.http.post(url, user)
-	        .subscribe((result: any) => {
-	          resolve(result.json());
-	        },
-	        (error) => {
-	          reject(error.json());
-	        });
-	    });
-	  }
-
-	  update(user: any) {
-	    return new Promise((resolve, reject) => {
-	      let url = this.API_URL + 'users/' + user.id;
-	      let data = {
-	        "first_name": user.first_name,
-	        "last_name": user.last_name
-	      }
-
-	      this.http.put(url, user)
-	        .subscribe((result: any) => {
-	          resolve(result.json());
-	        },
-	        (error) => {
-	          reject(error.json());
-	        });
-	    });
-	  }
-
-  remove(id: number) {
-    return new Promise((resolve, reject) => {
-      let url = this.API_URL + 'users/' + id;
-
-      this.http.delete(url)
-        .subscribe((result: any) => {
-          resolve(result.json());
-        },
-        (error) => {
-          reject(error.json());
-        });
-    });
-  }
+    remove(id: number) {
+        
+    }
 }
 

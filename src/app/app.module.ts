@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
+
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
@@ -46,6 +47,6 @@ class SQLiteMock {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SqlStorage,
     Dados,
-  ]
+  ],
 })
 export class AppModule {}

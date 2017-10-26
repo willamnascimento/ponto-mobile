@@ -7,19 +7,31 @@
 </ion-header>
 
 <ion-content padding>  
-
-  <ion-list>
-    <ion-item>
-      <ion-label stacked>Email</ion-label>
-      <ion-input type="text" name="email" [(ngModel)]="model.email"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked>Senha</ion-label>
-      <ion-input type="password" name="password" [(ngModel)]="model.password"></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <button ion-button block (click)="createAccount()" color="primary">Criar conta</button>
-
+    <form [formGroup]="account" (ngSubmit)="createAccount()">
+        <ion-list>
+            <ion-item>
+                <ion-label stacked>Email</ion-label>
+                <ion-input type="text" name="email" formControlName="email"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Nome</ion-label>
+                <ion-input type="text" name="nome" formControlName="nome"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Senha</ion-label>
+                <ion-input type="password" name="senha" formControlName="senha"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Apelido</ion-label>
+                <ion-input type="text" name="apelido" formControlName="apelido"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Carga Horária</ion-label>
+                <ion-input type="text" name="carga_horaria"formControlName="carga_horaria"></ion-input>
+            </ion-item>
+            <ion-item></ion-item>
+        </ion-list>
+        <button [disabled]="account.invalid" ion-button block (ngClick)="createAccount()" color="primary">Criar conta</button>
+    </form>
+  
 </ion-content>

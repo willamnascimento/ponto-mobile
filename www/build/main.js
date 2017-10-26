@@ -161,7 +161,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\Projetos\ponto-mobile.git\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar alex>\n\n    <ion-title>\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n  <h1 text-center margin-bottom>Escolha opção:</h1>\n\n\n\n  <button ion-button block (click)="openCreateAccount()">Criar conta</button>\n\n  <button ion-button block (click)="openLogin()">Login</button>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Projetos\ponto-mobile.git\src\pages\home\home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"C:\Projetos\ponto-mobile.git\src\pages\home\home.html"*/'\n\n<ion-content padding>\n\n	<div style="margin-top: 50%;">\n\n		<ion-grid>\n\n			<ion-row no-padding no-margin>\n\n				<ion-col col-3 no-padding ></ion-col>\n\n				<ion-col col-6 no-padding no-marging >\n\n					<button class="btn-center" ion-button block outline item-end icon-right (click)="openCreateAccount()">\n\n						Criar conta\n\n						<ion-icon name="person-add"></ion-icon>\n\n\n\n					</button>\n\n				</ion-col>\n\n				<ion-col col-3 no-padding ></ion-col>\n\n			</ion-row>\n\n\n\n			<ion-row no-padding no-margin>\n\n				<ion-col col-3 no-padding></ion-col>\n\n				<ion-col col-6 no-padding>\n\n					<button class="btn-center" ion-button outline item-end icon-right (click)="openLogin()">\n\n						Login  \n\n						<ion-icon name="contact"></ion-icon>\n\n					</button>\n\n				</ion-col>\n\n				<ion-col col-3 no-padding></ion-col>\n\n			</ion-row>\n\n		</ion-grid>\n\n	</div>\n\n</ion-content>\n\n<ion-footer>\n\n	<ion-row no-padding no-margin>\n\n		<ion-col col-4 no-padding></ion-col>\n\n		<ion-col col-4 no-padding>\n\n			<span class="span-ion-footer">© ClickPonto 2017</span>\n\n		</ion-col>\n\n		<ion-col col-4 no-padding></ion-col>\n\n	</ion-row>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Projetos\ponto-mobile.git\src\pages\home\home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]])
 ], HomePage);
@@ -250,110 +250,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var Dados = (function () {
     function Dados(http) {
         this.http = http;
-        this.API_URL = 'https://reqres.in/api/';
+        this.API_URL = 'http://localhost:60643/api/account/';
     }
-    Dados.prototype.createAccount = function (email, password) {
-        var _this = this;
-        debugger;
-        return new Promise(function (resolve, reject) {
-            var data = {
-                email: email,
-                password: password
-            };
-            _this.http.post(_this.API_URL + 'register', data)
-                .subscribe(function (result) {
-                resolve(result.json());
-            }, function (error) {
-                reject(error.json());
-            });
-        });
+    Dados.prototype.createAccount = function (parans) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this.http.post(this.API_URL + "add", parans, {
+            headers: headers,
+            method: "POST",
+            params: parans
+        }).map(function (res) { return res.json(); });
     };
     Dados.prototype.login = function (email, password) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var data = {
-                email: email,
-                password: password
-            };
-            _this.http.post(_this.API_URL + 'login', data)
-                .subscribe(function (result) {
-                resolve(result.json());
-            }, function (error) {
-                reject(error.json());
-            });
-        });
     };
     Dados.prototype.getAll = function (page) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var url = _this.API_URL + 'users/?per_page=10&page=' + page;
-            _this.http.get(url)
-                .subscribe(function (result) {
-                resolve(result.json());
-            }, function (error) {
-                reject(error.json());
-            });
-        });
     };
     Dados.prototype.get = function (id) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var url = _this.API_URL + 'users/' + id;
-            _this.http.get(url)
-                .subscribe(function (result) {
-                resolve(result.json());
-            }, function (error) {
-                reject(error.json());
-            });
-        });
     };
     Dados.prototype.insert = function (user) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var url = _this.API_URL + 'users/';
-            _this.http.post(url, user)
-                .subscribe(function (result) {
-                resolve(result.json());
-            }, function (error) {
-                reject(error.json());
-            });
-        });
     };
     Dados.prototype.update = function (user) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var url = _this.API_URL + 'users/' + user.id;
-            var data = {
-                "first_name": user.first_name,
-                "last_name": user.last_name
-            };
-            _this.http.put(url, user)
-                .subscribe(function (result) {
-                resolve(result.json());
-            }, function (error) {
-                reject(error.json());
-            });
-        });
     };
     Dados.prototype.remove = function (id) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var url = _this.API_URL + 'users/' + id;
-            _this.http.delete(url)
-                .subscribe(function (result) {
-                resolve(result.json());
-            }, function (error) {
-                reject(error.json());
-            });
-        });
     };
     return Dados;
 }());
 Dados = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], Dados);
 
+var _a;
 //# sourceMappingURL=dados.js.map
 
 /***/ }),
@@ -440,7 +366,7 @@ AppModule = __decorate([
                 ]
             }),
             __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
-            __WEBPACK_IMPORTED_MODULE_12__angular_http__["b" /* HttpModule */]
+            __WEBPACK_IMPORTED_MODULE_12__angular_http__["c" /* HttpModule */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* IonicApp */]],
         entryComponents: [
@@ -455,7 +381,7 @@ AppModule = __decorate([
             { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] },
             __WEBPACK_IMPORTED_MODULE_9__providers_sql_storage_sql_storage__["a" /* SqlStorage */],
             __WEBPACK_IMPORTED_MODULE_11__providers_dados_dados__["a" /* Dados */],
-        ]
+        ],
     })
 ], AppModule);
 
