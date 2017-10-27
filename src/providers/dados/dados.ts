@@ -22,8 +22,15 @@ export class Dados {
             );
     }
 
-    login(email: string, password: string) {
-        
+    login(parans) {
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this.http.post(this.API_URL + "login", parans, {
+            headers: headers,
+            method: "POST",
+            params: parans
+        }).map(
+            (res: Response) => { return res.json(); }
+            );
     }
 
     getAll(page: number) {

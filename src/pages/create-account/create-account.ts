@@ -31,38 +31,14 @@ export class CreateAccountPage implements OnInit {
         this.dados.createAccount(this.account.value)
             .subscribe(
             data => {
-                if (data.message.match("sucesso"))
-                    this.toast.create({ message: 'Conta criada com sucesso.', position: 'botton', duration: 3000,  }).present();
-                
+                this.toast.create({ message: data.message, position: 'botton', duration: 3000, }).present();
+                if (data.message.match("sucesso")) 
+                    this.navCtrl.push('ApontamentoPage');
             },
-
             err => {
                 this.toast.create({ message: 'Erro ao criar o usuário. Erro: ' + err, position: 'botton', duration: 3000 }).present();
                 console.log(err);
             }
             );
     }
-
-    //createAccount() {
-    //    var is_not_valid = false
-    //    if (this.model.email == undefined) {
-    //        this.toast.create({ message: 'Informe o email. ', position: 'botton', duration: 3000, }).present();
-    //        is_not_valid = true;
-    //    }
-
-    //    if (!is_not_valid) {
-    //        this.dados.createAccount(this.model.email, this.model.password, this.model.apelido, this.model.carga_horaria)
-    //            .then((result: any) => {
-    //                this.toast.create({ message: 'Usuário criado com sucesso. Token: ' + result.token, position: 'botton', duration: 3000 }).present();
-
-    //                //Salvar o token no Ionic Storage para usar em futuras requisições.
-    //                //Redirecionar o usuario para outra tela usando o navCtrl
-    //                //this.navCtrl.pop();
-    //                //this.navCtrl.setRoot()
-    //            })
-    //            .catch((error: any) => {
-    //                this.toast.create({ message: 'Erro ao criar o usuário. Erro: ' + error.error, position: 'botton', duration: 3000 }).present();
-    //            });
-    //    }
-    //}
 }

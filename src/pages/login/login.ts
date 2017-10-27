@@ -1,6 +1,8 @@
 import { Dados } from '../../providers/dados/dados';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Validators, FormBuilder } from '@angular/forms';
+
 
 @IonicPage()
 @Component({
@@ -9,27 +11,33 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 })
 
 export class LoginPage {
-  model: User;
+    login: any = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController, private dados: Dados) {
-    this.model = new User();
+    constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController, private dados: Dados, public formBuilder: FormBuilder) {
+        this.login = this.formBuilder.group({
+            email: ['', Validators.required],
+            senha: ['', Validators.required]
+            
+        });
+    }
+
+  ngOnInit() {
+      // ...
   }
 
-  login() {
-    //this.dados.login(this.model.email, this.model.password)
-    //  .then((result: any) => {
-    //    this.toast.create({ message: 'Usuário logado com sucesso. ', position: 'botton', duration: 3000         
-    //    }).present();
-        
-    //    //Salvar o token no Ionic Storage para usar em futuras requisições.
-    //    //Redirecionar o usuario para outra tela usando o navCtrl
-    //    this.navCtrl.push('CreateAccountPage');
-        
-    //  })
-    //  .catch((error: any) => {
-    //    this.toast.create({ message: 'Erro ao efetuar login. Erro: ' + error.error, position: 'botton', duration: 3000 }).present();
-    //    this.navCtrl.push('CreateAccountPage');
-    //  });
+  Login() {
+      this.dados.login(this.login.value)
+          .subscribe(
+          data => {
+              this.toast.create({ message: data.message, position: 'botton', duration: 3000, }).present();
+              if (data.message.match("sucesso"))
+                  this.navCtrl.push('ApontamentoPage');
+          },
+          err => {
+              this.toast.create({ message: 'Erro ao criar o usuário. Erro: ' + err, position: 'botton', duration: 3000 }).present();
+              console.log(err);
+          }
+          );
   }
 }
 

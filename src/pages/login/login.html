@@ -1,24 +1,23 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Login
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>
+            Login
+        </ion-title>
+    </ion-navbar>
 </ion-header>
-
 <ion-content padding>
-
-  <ion-list>
-    <ion-item>
-      <ion-label stacked>Email</ion-label>
-      <ion-input mask="(***)***-****" type="text" name="email" [(ngModel)]="model.email"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked>Senha</ion-label>
-      <ion-input  type="password" name="password" [(ngModel)]="model.password"></ion-input>
-    </ion-item>
-    <ion-item class="none"></ion-item>
-  </ion-list>
-  <button ion-button block (click)="login()" color="primary">Logar</button>
+    <form [formGroup]="login" (ngSubmit)="Login()">
+        <ion-list>
+            <ion-item>
+                <ion-label stacked>Email</ion-label>
+                <ion-input type="text" name="email" formControlName="email"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Senha</ion-label>
+                <ion-input type="password" name="senha" formControlName="senha"></ion-input>
+            </ion-item>
+            <ion-item class="none"></ion-item>
+        </ion-list>
+        <button ion-button block color="primary">Entrar</button>
+    </form>
 </ion-content>

@@ -1,4 +1,4 @@
-webpackJsonp([2],{
+webpackJsonp([3],{
 
 /***/ 107:
 /***/ (function(module, exports) {
@@ -21,12 +21,16 @@ webpackEmptyAsyncContext.id = 107;
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"../pages/create-account/create-account.module": [
+	"../pages/apontamento/apontamento.module": [
 		271,
+		2
+	],
+	"../pages/create-account/create-account.module": [
+		272,
 		1
 	],
 	"../pages/login/login.module": [
-		272,
+		273,
 		0
 	]
 };
@@ -260,7 +264,13 @@ var Dados = (function () {
             params: parans
         }).map(function (res) { return res.json(); });
     };
-    Dados.prototype.login = function (email, password) {
+    Dados.prototype.login = function (parans) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this.http.post(this.API_URL + "login", parans, {
+            headers: headers,
+            method: "POST",
+            params: parans
+        }).map(function (res) { return res.json(); });
     };
     Dados.prototype.getAll = function (page) {
     };
@@ -361,6 +371,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */], {}, {
                 links: [
+                    { loadChildren: '../pages/apontamento/apontamento.module#ApontamentoPageModule', name: 'ApontamentoPage', segment: 'apontamento', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/create-account/create-account.module#CreateAccountPageModule', name: 'CreateAccountPage', segment: 'create-account', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] }
                 ]
