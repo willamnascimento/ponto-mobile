@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { CacheProvider } from '../../providers/cache/cache';
 
-/**
- * Generated class for the ApontamentoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,8 +10,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ApontamentoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+    constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, public cache: CacheProvider) {
+        
+    }
+
+    ionViewWillEnter() {
+        this.viewCtrl.showBackButton(false);
+    }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ApontamentoPage');

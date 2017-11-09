@@ -25207,6 +25207,36 @@ ion-navbar.toolbar {
   border-radius: 22px;
 }
 
+.label-green-center {
+  color: #41c192 !important;
+  text-align: center;
+}
+
+.label-gray-center {
+  color: #999 !important;
+  text-align: center;
+}
+
+.item-input .label-md, .item-select .label-md, .item-datetime .label-md, .label-ios {
+  color: #999;
+}
+
+ion-label {
+  color: #999;
+  font-size: 1.4em;
+  margin-left: 10px !important;
+}
+
+.col-apontamento {
+  height: 45px;
+}
+
+.col-apontamento-hora {
+  height: 45px;
+  background-color: #181818;
+  border-radius: 5px;
+}
+
 .center {
   text-align: center;
 }
@@ -25226,5 +25256,9 @@ input.text-input, input.text-input-md {
 }
 
 .item-input .label-md, .item-select .label-md, .item-datetime .label-md, .label-ios {
+  color: #999;
+}
+
+.col .label-md {
   color: #999;
 }

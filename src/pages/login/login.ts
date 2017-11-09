@@ -1,8 +1,10 @@
 import { Dados } from '../../providers/dados/dados';
+import { AuthService } from '../../providers/auth-service/auth-service';
+import { CacheProvider } from '../../providers/cache/cache';
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController, Loading, IonicPage, ToastController } from 'ionic-angular';
 import { Validators, FormBuilder } from '@angular/forms';
-
+import { Global } from '../../providers/global/global';
 
 @IonicPage()
 @Component({
@@ -11,38 +13,54 @@ import { Validators, FormBuilder } from '@angular/forms';
 })
 
 export class LoginPage {
-    login: any = {};
+    loading: Loading;
+    registerCredentials = { email: '', senha: '' };
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController, private dados: Dados, public formBuilder: FormBuilder) {
-        this.login = this.formBuilder.group({
-            email: ['', Validators.required],
-            senha: ['', Validators.required]
+    constructor(private navCtrl: NavController, private toast: ToastController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private dados: Dados, private global: Global) { }
+
+    //constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController, private dados: Dados, public formBuilder: FormBuilder, public loadingCtrl: LoadingController, public cache: CacheProvider) {
+    //    this.login = this.formBuilder.group({
+    //        email: ['', Validators.required],
+    //        senha: ['', Validators.required]
             
-        });
-    }
+    //    });
+    //}
 
   ngOnInit() {
       // ...
   }
 
-  Login() {
-      this.dados.login(this.login.value)
-          .subscribe(
-          data => {
-              this.toast.create({ message: data.message, position: 'botton', duration: 3000, }).present();
-              if (data.message.match("sucesso"))
-                  this.navCtrl.push('ApontamentoPage');
-          },
-          err => {
-              this.toast.create({ message: 'Erro ao criar o usuário. Erro: ' + err, position: 'botton', duration: 3000 }).present();
-              console.log(err);
-          }
-          );
-  }
-}
+  login() {
 
-export class User {
-  email: string;
-  password: string;
-  carga_horaria: string;
+      this.showLoading();
+      if (!this.global.sem_banco) {
+          this.dados.login(this.registerCredentials)
+              .subscribe(
+              data => {
+                  this.toast.create({ message: data.message, position: 'botton', duration: 3000, }).present();
+                  if (data.message.match("sucesso"))
+                      this.navCtrl.push('ApontamentoPage');
+                  else
+                      this.loading.dismiss();
+              },
+              err => {
+                  this.toast.create({ message: ' Erro: verifique conexão com internet.', position: 'botton', duration: 3000 }).present();
+                  this.loading.dismiss();
+              }
+              );
+      } else {
+          this.navCtrl.push('ApontamentoPage');
+          this.toast.create({ message: 'Usuário logado com sucesso.', position: 'botton', duration: 3000 }).present();
+          this.loading.dismiss();
+      }
+      
+      //this.cache.loadList(this.login.value);
+  }
+  showLoading() {
+      this.loading = this.loadingCtrl.create({
+          content: 'Por favor aguarde...',
+          dismissOnPageChange: true
+      });
+      this.loading.present();
+  }
 }

@@ -20,3 +20,17 @@
 .button-ios, .button-md{
     border-radius: 22px;
 }
+
+.label-green-center{
+    color: #41c192 !important;
+    text-align: center;
+}
+
+.label-gray-center{
+    color: #999 !important;
+    text-align: center;
+}
+
+.item-input .label-md, .item-select .label-md, .item-datetime .label-md, .label-ios {
+    color: #999; 
+}
