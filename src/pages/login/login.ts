@@ -6,6 +6,7 @@ import { NavController, AlertController, LoadingController, Loading, IonicPage, 
 import { Validators, FormBuilder } from '@angular/forms';
 import { Global } from '../../providers/global/global';
 
+
 @IonicPage()
 @Component({
   selector: 'page-login',

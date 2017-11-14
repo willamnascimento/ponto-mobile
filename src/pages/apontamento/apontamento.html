@@ -7,7 +7,7 @@
 
 <ion-content padding>
     <ion-grid>
-        <ion-row no-padding>
+        <ion-row no-padding id="row-apontamento-entrada" class="row-apontamento" apontado="false">
             <ion-col col-3 no-padding class="col-apontamento"></ion-col>
             <ion-col col-4 no-padding class="col-apontamento">
                 <ion-label class="label-green-center">Entrada </ion-label>
@@ -18,102 +18,106 @@
             <ion-col col-4 no-padding class="col-apontamento">
                 <ion-row no-padding>
                     <ion-col col-5 no-padding class="col-apontamento-hora">
-                        <ion-label class="label-gray-center">07</ion-label>
+                        <ion-label class="label-gray-center horas">00</ion-label>
                     </ion-col>
                     <ion-col col-2 no-padding class="col-apontamento-hora1">
                         <ion-label>:</ion-label>
                     </ion-col>
                     <ion-col col-5 no-padding class="col-apontamento-hora">
-                        <ion-label class="label-gray-center">59</ion-label>
+                        <ion-label class="label-gray-center minutos">00</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
-            <ion-col col-5 no-padding class="col-apontamento">
-                <ion-icon name="checkmark" style="color: greenyellow; margin: -5px 0 0 15px; font-size: 3.4em !important;"></ion-icon>
+            <ion-col col-5 no-padding class="col-apontamento icon-apontamento">
+                <ion-icon name="close" class="icon-close"> </ion-icon>
+                <ion-icon name="checkmark" class="icon-checkmark hidden"> </ion-icon>
             </ion-col>
         </ion-row>
         
-        <ion-row no-padding>
+        <ion-row no-padding id="row-apontamento-intervalo" class="row-apontamento" apontado="false">
             <ion-col col-3 no-padding class="col-apontamento"></ion-col>
             <ion-col col-4 no-padding class="col-apontamento">
                 <ion-label class="label-green-center">Intervalo </ion-label>
             </ion-col>
             <ion-col col-5 no-padding class="col-apontamento"></ion-col>
-        
+
             <ion-col col-3 no-padding class="col-apontamento"></ion-col>
             <ion-col col-4 no-padding class="col-apontamento">
                 <ion-row no-padding>
                     <ion-col col-5 no-padding class="col-apontamento-hora">
-                        <ion-label class="label-gray-center">00</ion-label>
+                        <ion-label class="label-gray-center horas">00</ion-label>
                     </ion-col>
                     <ion-col col-2 no-padding class="col-apontamento-hora1">
                         <ion-label>:</ion-label>
                     </ion-col>
                     <ion-col col-5 no-padding class="col-apontamento-hora">
-                        <ion-label class="label-gray-center">00</ion-label>
+                        <ion-label class="label-gray-center minutos">00</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
-            <ion-col col-5 no-padding class="col-apontamento">
-                <ion-icon name="close" style="color: red; margin: -5px 0 0 15px; font-size: 3.4em !important;"></ion-icon>
+            <ion-col col-5 no-padding class="col-apontamento icon-apontamento">
+                <ion-icon name="close" class="icon-close"> </ion-icon>
+                <ion-icon name="checkmark" class="icon-checkmark hidden"> </ion-icon>
             </ion-col>
         </ion-row>
 
-        <ion-row no-padding>
+        <ion-row no-padding id="row-apontamento-chegada" class="row-apontamento" apontado="false">
             <ion-col col-3 no-padding class="col-apontamento"></ion-col>
             <ion-col col-4 no-padding class="col-apontamento">
                 <ion-label class="label-green-center">Chegada </ion-label>
             </ion-col>
             <ion-col col-5 no-padding class="col-apontamento"></ion-col>
-        
+
             <ion-col col-3 no-padding class="col-apontamento"></ion-col>
             <ion-col col-4 no-padding class="col-apontamento">
                 <ion-row no-padding>
                     <ion-col col-5 no-padding class="col-apontamento-hora">
-                        <ion-label class="label-gray-center">00</ion-label>
+                        <ion-label class="label-gray-center horas">00</ion-label>
                     </ion-col>
                     <ion-col col-2 no-padding class="col-apontamento-hora1">
                         <ion-label>:</ion-label>
                     </ion-col>
                     <ion-col col-5 no-padding class="col-apontamento-hora">
-                        <ion-label class="label-gray-center">00</ion-label>
+                        <ion-label class="label-gray-center minutos">00</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
-            <ion-col col-5  class="col-apontamento">
-                <ion-icon name="close" style="color: red; margin: -5px 0 0 15px; font-size: 3.4em !important;"></ion-icon>
+            <ion-col col-5 class="col-apontamento icon-apontamento">
+                <ion-icon name="close" class="icon-close"> </ion-icon>
+                <ion-icon name="checkmark" class="icon-checkmark hidden"> </ion-icon>
             </ion-col>
         </ion-row>
 
-        <ion-row no-padding>
+        <ion-row no-padding id="row-apontamento-saida" class="row-apontamento" apontado="false">
             <ion-col col-3 no-padding class="col-apontamento"></ion-col>
             <ion-col col-4 no-padding class="col-apontamento">
                 <ion-label class="label-green-center">Saída </ion-label>
             </ion-col>
             <ion-col col-5 no-padding class="col-apontamento"></ion-col>
-        
+
             <ion-col col-3 no-padding class="col-apontamento"></ion-col>
             <ion-col col-4 no-padding class="col-apontamento">
                 <ion-row no-padding>
                     <ion-col col-5 no-padding class="col-apontamento-hora">
-                        <ion-label class="label-gray-center">00</ion-label>
+                        <ion-label class="label-gray-center horas">00</ion-label>
                     </ion-col>
                     <ion-col col-2 no-padding class="col-apontamento-hora1">
                         <ion-label>:</ion-label>
                     </ion-col>
                     <ion-col col-5 no-padding class="col-apontamento-hora">
-                        <ion-label class="label-gray-center">00</ion-label>
+                        <ion-label class="label-gray-center minutos">00</ion-label>
                     </ion-col>
                 </ion-row>
             </ion-col>
-            <ion-col col-5 class="col-apontamento">
-                <ion-icon name="close" style="color: red; margin: -5px 0 0 15px; font-size: 3.4em !important;"></ion-icon>
+            <ion-col col-5 class="col-apontamento icon-apontamento">
+                <ion-icon name="close" class="icon-close"> </ion-icon>
+                <ion-icon name="checkmark" class="icon-checkmark hidden"> </ion-icon>
             </ion-col>
         </ion-row>
 
         <ion-row style="margin-top: 15px;">
             <ion-col col-12 no-padding no-marging>
-                <button class="btn-center" ion-button  outline item-end icon-right (click)="openCreateAccount()" style="height: 120px;">
+                <button class="btn-center" ion-button  outline item-end icon-right (click)="Apontar()" style="height: 120px;">
                     <ion-icon name="clock" style="font-size: 7.4em !important; padding-left: 0;"></ion-icon>
                 </button>
             </ion-col>

@@ -25237,6 +25237,22 @@ ion-label {
   border-radius: 5px;
 }
 
+.icon-close {
+  margin: -5px 0 0 15px;
+  font-size: 3.4em !important;
+  color: red;
+}
+
+.icon-checkmark {
+  margin: -5px 0 0 15px;
+  font-size: 3.4em !important;
+  color: greenyellow;
+}
+
+.hidden {
+  display: none !important;
+}
+
 .center {
   text-align: center;
 }

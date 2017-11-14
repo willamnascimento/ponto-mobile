@@ -1,14 +1,14 @@
 webpackJsonp([1],{
 
-/***/ 284:
+/***/ 285:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApontamentoPageModule", function() { return ApontamentoPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateAccountPageModule", function() { return CreateAccountPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__apontamento__ = __webpack_require__(286);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_account__ = __webpack_require__(288);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ApontamentoPageModule = (function () {
-    function ApontamentoPageModule() {
+var CreateAccountPageModule = (function () {
+    function CreateAccountPageModule() {
     }
-    return ApontamentoPageModule;
+    return CreateAccountPageModule;
 }());
-ApontamentoPageModule = __decorate([
+CreateAccountPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__apontamento__["a" /* ApontamentoPage */],
+            __WEBPACK_IMPORTED_MODULE_2__create_account__["a" /* CreateAccountPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__apontamento__["a" /* ApontamentoPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__create_account__["a" /* CreateAccountPage */]),
         ],
     })
-], ApontamentoPageModule);
+], CreateAccountPageModule);
 
-//# sourceMappingURL=apontamento.module.js.map
+//# sourceMappingURL=create-account.module.js.map
 
 /***/ }),
 
-/***/ 286:
+/***/ 288:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApontamentoPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_cache_cache__ = __webpack_require__(209);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreateAccountPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_dados_dados__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(39);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -58,30 +59,60 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ApontamentoPage = (function () {
-    function ApontamentoPage(navCtrl, navParams, viewCtrl, cache) {
+
+var CreateAccountPage = (function () {
+    function CreateAccountPage(navCtrl, navParams, toast, dados, formBuilder, loadingCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.viewCtrl = viewCtrl;
-        this.cache = cache;
+        this.toast = toast;
+        this.dados = dados;
+        this.formBuilder = formBuilder;
+        this.loadingCtrl = loadingCtrl;
+        this.account = {};
+        this.account = this.formBuilder.group({
+            email: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["f" /* Validators */].required],
+            nome: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["f" /* Validators */].required],
+            senha: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["f" /* Validators */].required],
+            apelido: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["f" /* Validators */].required],
+            carga_horaria: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["f" /* Validators */].required]
+        });
     }
-    ApontamentoPage.prototype.ionViewWillEnter = function () {
-        this.viewCtrl.showBackButton(false);
+    CreateAccountPage.prototype.ngOnInit = function () {
+        // ...
     };
-    ApontamentoPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ApontamentoPage');
+    CreateAccountPage.prototype.createAccount = function () {
+        var _this = this;
+        this.showLoading();
+        this.dados.createAccount(this.account.value)
+            .subscribe(function (data) {
+            _this.toast.create({ message: data.message, position: 'botton', duration: 3000, }).present();
+            if (data.message.match("sucesso"))
+                _this.navCtrl.push('ApontamentoPage');
+            else
+                _this.loading.dismiss();
+        }, function (err) {
+            _this.toast.create({ message: 'Erro ao criar o usuário. Erro: ' + err, position: 'botton', duration: 3000 }).present();
+            console.log(err);
+        });
     };
-    return ApontamentoPage;
+    CreateAccountPage.prototype.showLoading = function () {
+        this.loading = this.loadingCtrl.create({
+            content: 'Por favor aguarde...',
+            dismissOnPageChange: true
+        });
+        this.loading.present();
+    };
+    return CreateAccountPage;
 }());
-ApontamentoPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-apontamento',template:/*ion-inline-start:"C:\Projetos\ponto-mobile.git\src\pages\apontamento\apontamento.html"*/'\n\n<ion-header>\n\n    <ion-navbar>\n\n        <ion-title>Apontamento</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-grid>\n\n        <ion-row no-padding>\n\n            <ion-col col-3 no-padding class="col-apontamento"></ion-col>\n\n            <ion-col col-4 no-padding class="col-apontamento">\n\n                <ion-label class="label-green-center">Entrada </ion-label>\n\n            </ion-col>\n\n            <ion-col col-5 no-padding class="col-apontamento"></ion-col>\n\n        \n\n            <ion-col col-3 no-padding class="col-apontamento"></ion-col>\n\n            <ion-col col-4 no-padding class="col-apontamento">\n\n                <ion-row no-padding>\n\n                    <ion-col col-5 no-padding class="col-apontamento-hora">\n\n                        <ion-label class="label-gray-center">07</ion-label>\n\n                    </ion-col>\n\n                    <ion-col col-2 no-padding class="col-apontamento-hora1">\n\n                        <ion-label>:</ion-label>\n\n                    </ion-col>\n\n                    <ion-col col-5 no-padding class="col-apontamento-hora">\n\n                        <ion-label class="label-gray-center">59</ion-label>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-col>\n\n            <ion-col col-5 no-padding class="col-apontamento">\n\n                <ion-icon name="checkmark" style="color: greenyellow; margin: -5px 0 0 15px; font-size: 3.4em !important;"></ion-icon>\n\n            </ion-col>\n\n        </ion-row>\n\n        \n\n        <ion-row no-padding>\n\n            <ion-col col-3 no-padding class="col-apontamento"></ion-col>\n\n            <ion-col col-4 no-padding class="col-apontamento">\n\n                <ion-label class="label-green-center">Intervalo </ion-label>\n\n            </ion-col>\n\n            <ion-col col-5 no-padding class="col-apontamento"></ion-col>\n\n        \n\n            <ion-col col-3 no-padding class="col-apontamento"></ion-col>\n\n            <ion-col col-4 no-padding class="col-apontamento">\n\n                <ion-row no-padding>\n\n                    <ion-col col-5 no-padding class="col-apontamento-hora">\n\n                        <ion-label class="label-gray-center">00</ion-label>\n\n                    </ion-col>\n\n                    <ion-col col-2 no-padding class="col-apontamento-hora1">\n\n                        <ion-label>:</ion-label>\n\n                    </ion-col>\n\n                    <ion-col col-5 no-padding class="col-apontamento-hora">\n\n                        <ion-label class="label-gray-center">00</ion-label>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-col>\n\n            <ion-col col-5 no-padding class="col-apontamento">\n\n                <ion-icon name="close" style="color: red; margin: -5px 0 0 15px; font-size: 3.4em !important;"></ion-icon>\n\n            </ion-col>\n\n        </ion-row>\n\n\n\n        <ion-row no-padding>\n\n            <ion-col col-3 no-padding class="col-apontamento"></ion-col>\n\n            <ion-col col-4 no-padding class="col-apontamento">\n\n                <ion-label class="label-green-center">Chegada </ion-label>\n\n            </ion-col>\n\n            <ion-col col-5 no-padding class="col-apontamento"></ion-col>\n\n        \n\n            <ion-col col-3 no-padding class="col-apontamento"></ion-col>\n\n            <ion-col col-4 no-padding class="col-apontamento">\n\n                <ion-row no-padding>\n\n                    <ion-col col-5 no-padding class="col-apontamento-hora">\n\n                        <ion-label class="label-gray-center">00</ion-label>\n\n                    </ion-col>\n\n                    <ion-col col-2 no-padding class="col-apontamento-hora1">\n\n                        <ion-label>:</ion-label>\n\n                    </ion-col>\n\n                    <ion-col col-5 no-padding class="col-apontamento-hora">\n\n                        <ion-label class="label-gray-center">00</ion-label>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-col>\n\n            <ion-col col-5  class="col-apontamento">\n\n                <ion-icon name="close" style="color: red; margin: -5px 0 0 15px; font-size: 3.4em !important;"></ion-icon>\n\n            </ion-col>\n\n        </ion-row>\n\n\n\n        <ion-row no-padding>\n\n            <ion-col col-3 no-padding class="col-apontamento"></ion-col>\n\n            <ion-col col-4 no-padding class="col-apontamento">\n\n                <ion-label class="label-green-center">Saída </ion-label>\n\n            </ion-col>\n\n            <ion-col col-5 no-padding class="col-apontamento"></ion-col>\n\n        \n\n            <ion-col col-3 no-padding class="col-apontamento"></ion-col>\n\n            <ion-col col-4 no-padding class="col-apontamento">\n\n                <ion-row no-padding>\n\n                    <ion-col col-5 no-padding class="col-apontamento-hora">\n\n                        <ion-label class="label-gray-center">00</ion-label>\n\n                    </ion-col>\n\n                    <ion-col col-2 no-padding class="col-apontamento-hora1">\n\n                        <ion-label>:</ion-label>\n\n                    </ion-col>\n\n                    <ion-col col-5 no-padding class="col-apontamento-hora">\n\n                        <ion-label class="label-gray-center">00</ion-label>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-col>\n\n            <ion-col col-5 class="col-apontamento">\n\n                <ion-icon name="close" style="color: red; margin: -5px 0 0 15px; font-size: 3.4em !important;"></ion-icon>\n\n            </ion-col>\n\n        </ion-row>\n\n\n\n        <ion-row style="margin-top: 15px;">\n\n            <ion-col col-12 no-padding no-marging>\n\n                <button class="btn-center" ion-button  outline item-end icon-right (click)="openCreateAccount()" style="height: 120px;">\n\n                    <ion-icon name="clock" style="font-size: 7.4em !important; padding-left: 0;"></ion-icon>\n\n                </button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n</ion-content>\n\n<ion-footer>\n\n    <ion-row no-padding no-margin>\n\n        <ion-col col-4 no-padding></ion-col>\n\n        <ion-col col-4 no-padding style="text-align: center;">\n\n            <span class="span-ion-footer btn-center">© ClickPonto 2017</span>\n\n        </ion-col>\n\n        <ion-col col-4 no-padding></ion-col>\n\n    </ion-row>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Projetos\ponto-mobile.git\src\pages\apontamento\apontamento.html"*/,
+CreateAccountPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["e" /* IonicPage */])(),
+    Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["n" /* Component */])({
+        selector: 'page-create-account',template:/*ion-inline-start:"C:\Projetos\ponto-mobile.git\src\pages\create-account\create-account.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Criar Conta\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>  \n    <form [formGroup]="account" (ngSubmit)="createAccount()">\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label stacked>Email</ion-label>\n\n                <ion-input type="text" name="email" formControlName="email"></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>Nome</ion-label>\n\n                <ion-input type="text" name="nome" formControlName="nome"></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>Senha</ion-label>\n\n                <ion-input type="password" name="senha" formControlName="senha"></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>Apelido</ion-label>\n\n                <ion-input type="text" name="apelido" formControlName="apelido"></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>Carga Horária</ion-label>\n\n                <ion-input type="text" name="carga_horaria"formControlName="carga_horaria"></ion-input>\n\n            </ion-item>\n\n            <ion-item></ion-item>\n\n        </ion-list>\n\n        <button [disabled]="account.invalid" ion-button block color="primary">Criar conta</button>\n    </form>\n  \n</ion-content>\n'/*ion-inline-end:"C:\Projetos\ponto-mobile.git\src\pages\create-account\create-account.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */], __WEBPACK_IMPORTED_MODULE_2__providers_cache_cache__["a" /* CacheProvider */]])
-], ApontamentoPage);
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_0__providers_dados_dados__["a" /* Dados */], __WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* LoadingController */]])
+], CreateAccountPage);
 
-//# sourceMappingURL=apontamento.js.map
+//# sourceMappingURL=create-account.js.map
 
 /***/ })
 

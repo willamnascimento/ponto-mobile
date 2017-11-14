@@ -270,11 +270,11 @@ AuthService = __decorate([
 var map = {
 	"../pages/apontamento/apontamento.module": [
 		284,
-		1
+		0
 	],
 	"../pages/create-account/create-account.module": [
 		285,
-		0
+		1
 	],
 	"../pages/login/login.module": [
 		283,
